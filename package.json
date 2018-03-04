@@ -1,0 +1,13 @@
+{
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-checktextdomain": "^1.0.1",
+    "grunt-contrib-copy": "~0.7.0",
+    "grunt-contrib-sass": "~0.8.1",
+    "grunt-wp-i18n": "~0.4.9",
+    "grunt-wp-readme-to-markdown": "~0.8.0"
+  }
+}
