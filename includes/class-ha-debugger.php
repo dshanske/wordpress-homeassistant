@@ -78,7 +78,9 @@ class HA_Debugger {
 		<form action="<?php echo site_url(); ?>/?hadebug=<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 		<p>
 			<?php _e( 'Type:', 'homeassistant' ); ?>
-		<input type="text" name="hadebug" size="70" />
+			<select id="hadebug" name="hadebug">
+				<?php Home_Assistant::type_select( '', true ); ?>
+			</select>
 		</p>
 		<p>
 			<?php _e( 'Name: ', 'homeassistant' ); ?>
