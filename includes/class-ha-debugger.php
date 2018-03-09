@@ -32,7 +32,7 @@ class HA_Debugger {
 		if ( ! is_user_logged_in() ) {
 			auth_redirect();
 		}
-		$HA = new Home_Assistant();
+		$HA = new Home_Assistant_State();
 		header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		status_header( 200 );
 		$return = $HA->get_state( $type, $name );
