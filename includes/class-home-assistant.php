@@ -7,7 +7,7 @@ class Home_Assistant {
 		$this->url      = trailingslashit( get_option( 'homeassistant_url' ) ) . 'api/';
 	}
 
-	public function fetch( $path ) {
+	private function fetch( $path ) {
 			$args = array(
 				'timeout'    => 30,
 				'headers'    => array(
@@ -34,5 +34,11 @@ class Home_Assistant {
 			return wp_remote_retrieve_body( $response );
 	}
 
+	public function get_state( $type = null, $name = null ) {
+		if ( empty( $type ) || empty( $name ) ) {
+			return $this->fetch( 'states/' );
+		}
+		return $this->fetch( 'states/' . $type . '.' . $name );
+	}
 
 }

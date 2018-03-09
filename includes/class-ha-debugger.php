@@ -19,8 +19,9 @@ class HA_Debugger {
 		if ( ! $wp->get( 'hadebug' ) ) {
 			return;
 		}
-		$path = $wp->get( 'hadebug', 'form' );
-		if ( 'form' === $path ) {
+		$type = $wp->get( 'hadebug', 'form' );
+		$name = $wp->get( 'name', 'form' );
+		if ( 'form' === $type ) {
 			status_header( 200 );
 			self::form_header();
 			self::post_form();
@@ -34,7 +35,7 @@ class HA_Debugger {
 		$HA = new Home_Assistant();
 		header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		status_header( 200 );
-		$return = $HA->fetch( $path );
+		$return = $HA->get_state( $type, $name );
 		if ( ! is_wp_error( $return ) ) {
 			echo $return;
 		} else {
@@ -76,8 +77,12 @@ class HA_Debugger {
 	  <div>
 		<form action="<?php echo site_url(); ?>/?hadebug=<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 		<p>
-			<?php _e( 'Path:', 'homeassistant' ); ?>
+			<?php _e( 'Type:', 'homeassistant' ); ?>
 		<input type="text" name="hadebug" size="70" />
+		</p>
+		<p>
+			<?php _e( 'Name: ', 'homeassistant' ); ?>
+		<input type=text" name="name" size="70" />
 		</p>
 			<input type="submit" />
 	  </form>
