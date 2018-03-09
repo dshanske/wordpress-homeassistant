@@ -16,6 +16,12 @@ add_action( 'init', array( 'Home_Assistant_Plugin', 'init' ) );
 class Home_Assistant_Plugin {
 	public static $version = '0.1.0';
 	public static function init() {
+		require_once plugin_dir_path( __FILE__ ) . '/includes/class-home-assistant.php';
+		if ( WP_DEBUG ) {
+			require_once plugin_dir_path( __FILE__ ) . '/includes/class-ha-debugger.php';
+			new HA_Debugger();
+		}
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-ha-config.php';
 	}
 	public static function plugins_loaded() {
 		load_plugin_textdomain( 'homeassistant', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
