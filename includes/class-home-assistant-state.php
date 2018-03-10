@@ -1,8 +1,18 @@
 <?php
 // Home Assistant State
 class Home_Assistant_State extends Home_Assistant {
-	public function __construct() {
+	public $attributes   = array();
+	public $entity_id    = '';
+	public $last_changed = '';
+	public $last_updated = '';
+	public $state        = '';
+
+	public function __construct( $type, $name = null ) {
 		parent::__construct();
+		if ( ! $name ) {
+			$this->entity_id = $type;
+		}
+		$this->entity_id = $type . '.' . $name;
 	}
 
 	public static function get_types() {
@@ -10,11 +20,12 @@ class Home_Assistant_State extends Home_Assistant {
 			'binary_sensor'  => __( 'Binary Sensor', 'homeassistant' ),
 			'sensor'         => __( 'Sensor', 'homeassistant' ),
 			'device_tracker' => __( 'Device Tracker', 'homeassistant' ),
+			'media_player'   => __( 'Media Player', 'homeassistant' ),
 		);
 	}
 
 	public static function type_select( $select, $echo = false ) {
-		$choices = Home_Assistant::get_types();
+		$choices = Home_Assistant_State::get_types();
 		$return  = '';
 		foreach ( $choices as $value => $text ) {
 			$return .= sprintf( '<option value=%1s %2s>%3s</option>', $value, selected( $select, $value, false ), $text );
@@ -25,28 +36,26 @@ class Home_Assistant_State extends Home_Assistant {
 		echo $return;
 	}
 
-	public function get_state( $type = null, $name = null ) {
-		if ( empty( $type ) && empty( $name ) ) {
-			return $this->fetch( 'states/' );
-		}
-		if ( empty( $name ) ) {
-			return $this->fetch( 'states/' . $type );
-		}
-		return $this->fetch( 'states/' . $type . '.' . $name );
+	public function get_state() {
+		return $this->state;
 	}
 
-	public function get_state_attribute( $type = null, $name = null, $attribute = null ) {
-		if ( empty( $type ) && empty( $name ) && empty( $attribute ) ) {
-			return null;
+	public function get() {
+		$return = $this->fetch( 'states/' . $this->entity_id );
+		if ( is_wp_error( $return ) ) {
+			return $return;
 		}
-		else {
-			$state = $this->get_state( $type, $name );
-			if ( ! is_array( $state ) ) {
-				return null;
-			}
-			return isset( $state['attribute'][$attribute] ) ? $state['attribute'][$attribute] : null;
+		$return = json_decode( $return );
+		foreach ( $return as $key => $value ) {
+				$this->$key = $value;
 		}
+	}
 
+	public function get_attribute( $attribute = null ) {
+		if ( ! $attribute ) {
+			return $this->attribute;
+		}
+		return $this->ifset( $this->attribute['attribute'], '' );
 	}
 
 }

@@ -10,7 +10,7 @@
  * Domain Path:  /languages
  */
 if ( ! defined( 'ISO8601U' ) ) {
-		define( 'ISO8601U', "Y-m-d\TH:i:s.uO" );
+		define( 'ISO8601U', 'Y-m-d\TH:i:s.uO' );
 }
 
 add_action( 'plugins_loaded', array( 'Home_Assistant_Plugin', 'plugins_loaded' ) );

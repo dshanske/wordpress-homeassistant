@@ -32,14 +32,12 @@ class HA_Debugger {
 		if ( ! is_user_logged_in() ) {
 			auth_redirect();
 		}
-		$HA = new Home_Assistant_State();
+		$HA = new Home_Assistant_State( $type, $name );
 		header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		status_header( 200 );
-		$return = $HA->get_state( $type, $name );
+		$return = $HA->get();
 		if ( ! is_wp_error( $return ) ) {
-			echo $return;
-		} else {
-			print_r( $return );
+			echo wp_json_encode( $HA );
 		}
 		exit;
 	}
@@ -79,7 +77,7 @@ class HA_Debugger {
 		<p>
 			<?php _e( 'Type:', 'homeassistant' ); ?>
 			<select id="hadebug" name="hadebug">
-				<?php Home_Assistant::type_select( '', true ); ?>
+				<?php Home_Assistant_State::type_select( '', true ); ?>
 			</select>
 		</p>
 		<p>

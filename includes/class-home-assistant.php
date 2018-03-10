@@ -8,6 +8,17 @@ class Home_Assistant {
 		$this->url      = trailingslashit( get_option( 'homeassistant_url' ) ) . 'api/';
 	}
 
+		/**
+		 * If set, return otherwise false.
+		 *
+		 * @param type $var Check if set.
+		 * @return $var|false Return either $var or $return.
+		 */
+	public static function ifset( $var, $return = false ) {
+
+			return isset( $var ) ? $var : $return;
+	}
+
 	protected function fetch( $path ) {
 			$args = array(
 				'timeout'    => 30,
