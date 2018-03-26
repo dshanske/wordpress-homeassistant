@@ -26,7 +26,17 @@ class Home_Assistant_Plugin {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/class-ha-debugger.php';
 			new HA_Debugger();
 		}
+		if ( class_exists( 'Simple_Location_Plugin' ) ) {
+			require_once plugin_dir_path( __FILE__ ) . '/includes/class-location-provider-homeassistant.php';
+			add_filter( 'geolocation_providers', array( 'Home_Assistant_Plugin', 'geolocation_providers' ) );
+		}
 	}
+
+	public static function geolocation_providers( $return ) {
+		$return[ 'Homeassistant' ] = __( 'Home Assistant', 'homeassistant' );
+		return $return;
+	}
+
 	public static function plugins_loaded() {
 		load_plugin_textdomain( 'homeassistant', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
