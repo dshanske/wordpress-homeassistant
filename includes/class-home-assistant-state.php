@@ -11,8 +11,9 @@ class Home_Assistant_State extends Home_Assistant {
 		parent::__construct();
 		if ( ! $name ) {
 			$this->entity_id = $type;
+		} else {
+			$this->entity_id = $type . '.' . $name;
 		}
-		$this->entity_id = $type . '.' . $name;
 	}
 
 	public static function get_types() {
@@ -45,7 +46,7 @@ class Home_Assistant_State extends Home_Assistant {
 		if ( is_wp_error( $return ) ) {
 			return $return;
 		}
-		$return = json_decode( $return );
+		$return = json_decode( $return, true );
 		foreach ( $return as $key => $value ) {
 				$this->$key = $value;
 		}
@@ -53,9 +54,9 @@ class Home_Assistant_State extends Home_Assistant {
 
 	public function get_attribute( $attribute = null ) {
 		if ( ! $attribute ) {
-			return $this->attribute;
+			return $this->attributes;
 		}
-		return $this->ifset( $this->attribute['attribute'], '' );
+		return $this->ifset( $this->attributes[ $attribute ], '' );
 	}
 
 }
