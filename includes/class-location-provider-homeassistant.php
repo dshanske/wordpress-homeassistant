@@ -7,7 +7,11 @@ class Location_Provider_Homeassistant extends Location_Provider {
 	}
 
 	public function retrieve() {
-		$HA         = new Home_Assistant_State( 'device_tracker.moto_rs' );
+		$location = get_user_meta( $this->user, 'homeassistant_device_tracker', true );
+		if ( ! $location ) {
+			return null;
+		}
+		$HA         = new Home_Assistant_State( $location );
 		$properties = array( 'longitude', 'latitude', 'altitude', 'heading', 'speed' );
 		$HA->get();
 		foreach ( $properties as $property ) {
