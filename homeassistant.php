@@ -33,7 +33,7 @@ class Home_Assistant_Plugin {
 	}
 
 	public static function geolocation_providers( $return ) {
-		$return[ 'Homeassistant' ] = __( 'Home Assistant', 'homeassistant' );
+		$return['Homeassistant'] = __( 'Home Assistant', 'homeassistant' );
 		return $return;
 	}
 
