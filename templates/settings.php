@@ -4,9 +4,9 @@
 		<?php _e( 'Home Assistant Base URL', 'homeassistant' ); ?>
 	</label>
 	<br />
-	<label for="homeassistant_password">
-		<input type="password" name="homeassistant_password" id="homeassistant_password" class="widefat" value="<?php echo get_option( 'homeassistant_password' ); ?>" />
-		<?php _e( 'Home Assistant Password', 'homeassistant' ); ?>
+	<label for="homeassistant_token">
+		<input type="password" name="homeassistant_token" id="homeassistant_token" class="widefat" value="<?php echo get_option( 'homeassistant_token' ); ?>" />
+		<?php _e( 'Home Assistant Token', 'homeassistant' ); ?>
 	</label>
 	<br />
 </fieldset>

@@ -19,10 +19,10 @@ class HA_Config {
 		);
 		register_setting(
 			'ha', // group
-			'homeassistant_password', // option name
+			'homeassistant_token', // option name
 			array(
 				'type'         => 'string',
-				'description'  => 'Home Assistant Password',
+				'description'  => 'Home Assistant Long Lived Token',
 				'show_in_rest' => false,
 				'default'      => '',
 			)

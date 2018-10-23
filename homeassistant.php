@@ -28,13 +28,7 @@ class Home_Assistant_Plugin {
 		}
 		if ( class_exists( 'Simple_Location_Plugin' ) ) {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/class-location-provider-homeassistant.php';
-			add_filter( 'geolocation_providers', array( 'Home_Assistant_Plugin', 'geolocation_providers' ) );
 		}
-	}
-
-	public static function geolocation_providers( $return ) {
-		$return['Homeassistant'] = __( 'Home Assistant', 'homeassistant' );
-		return $return;
 	}
 
 	public static function plugins_loaded() {

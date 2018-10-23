@@ -4,8 +4,8 @@ class Home_Assistant {
 	private $password;
 	private $url;
 	public function __construct() {
-		$this->password = get_option( 'homeassistant_password' );
-		$this->url      = trailingslashit( get_option( 'homeassistant_url' ) ) . 'api/';
+		$this->token = get_option( 'homeassistant_token' );
+		$this->url   = trailingslashit( get_option( 'homeassistant_url' ) ) . 'api/';
 	}
 
 		/**
@@ -23,8 +23,8 @@ class Home_Assistant {
 			$args = array(
 				'timeout'    => 30,
 				'headers'    => array(
-					'Content-Type' => 'application/json',
-					'x-ha-access'  => $this->password,
+					'Content-Type'  => 'application/json',
+					'Authorization' => 'Bearer ' . $this->token,
 				),
 				// Use an explicit user-agent for this
 				'user-agent' => 'WP/' . get_bloginfo( 'version' ) . '); ' . get_bloginfo( 'url' ),

@@ -87,7 +87,7 @@ class HA_Debugger {
 			<input type="submit" />
 	  </form>
 	</div>
-	<?php
+		<?php
 	}
 
 }

@@ -3,6 +3,8 @@
 class Location_Provider_Homeassistant extends Location_Provider {
 
 	public function __construct( $args = array() ) {
+		$this->name = __( 'Home Assistant', 'homeassistant' );
+		$this->slug = 'homeassistant';
 		parent::__construct( $args );
 	}
 
@@ -22,3 +24,5 @@ class Location_Provider_Homeassistant extends Location_Provider {
 
 
 }
+
+register_sloc_provider( new Location_Provider_Homeassistant() );
