@@ -56,7 +56,10 @@ class Home_Assistant_State extends Home_Assistant {
 		if ( ! $attribute ) {
 			return $this->attributes;
 		}
-		return $this->ifset( $this->attributes[ $attribute ], '' );
+		if ( array_key_exists( $attribute, $this->attributes ) ) {
+			return $this->attributes[ $attribute ];
+		}
+		return false;
 	}
 
 }

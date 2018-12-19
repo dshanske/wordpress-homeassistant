@@ -22,10 +22,6 @@ class Home_Assistant_Plugin {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-ha-config.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-home-assistant.php';
 		require_once plugin_dir_path( __FILE__ ) . '/includes/class-home-assistant-state.php';
-		if ( WP_DEBUG ) {
-			require_once plugin_dir_path( __FILE__ ) . '/includes/class-ha-debugger.php';
-			new HA_Debugger();
-		}
 		if ( class_exists( 'Simple_Location_Plugin' ) ) {
 			require_once plugin_dir_path( __FILE__ ) . '/includes/class-location-provider-homeassistant.php';
 		}
