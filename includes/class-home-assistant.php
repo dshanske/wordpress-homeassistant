@@ -29,10 +29,8 @@ class Home_Assistant {
 				// Use an explicit user-agent for this
 				'user-agent' => 'WP/' . get_bloginfo( 'version' ) . '); ' . get_bloginfo( 'url' ),
 			);
-
 			$response      = wp_safe_remote_get( $this->url . $path, $args );
 			$response_code = wp_remote_retrieve_response_code( $response );
-
 		if ( is_wp_error( $response ) ) {
 				return $response;
 		}
