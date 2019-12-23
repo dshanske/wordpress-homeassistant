@@ -26,7 +26,7 @@ class Home_Assistant_State extends Home_Assistant {
 	}
 
 	public static function type_select( $select, $echo = false ) {
-		$choices = Home_Assistant_State::get_types();
+		$choices = self::get_types();
 		$return  = '';
 		foreach ( $choices as $value => $text ) {
 			$return .= sprintf( '<option value=%1s %2s>%3s</option>', $value, selected( $select, $value, false ), $text );

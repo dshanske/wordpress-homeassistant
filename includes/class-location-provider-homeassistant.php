@@ -5,10 +5,11 @@ class Location_Provider_Homeassistant extends Location_Provider {
 	public function __construct( $args = array() ) {
 		$this->name = __( 'Home Assistant', 'homeassistant' );
 		$this->slug = 'homeassistant';
+		$this->background = true;
 		parent::__construct( $args );
 	}
 
-	public function retrieve() {
+	public function retrieve( $time = null, $args = array()  ) {
 		$location = get_user_meta( $this->user, 'homeassistant_device_tracker', true );
 		if ( ! $location ) {
 			return null;
