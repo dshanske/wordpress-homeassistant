@@ -31,16 +31,16 @@ class Home_Assistant {
 			);
 			$response      = wp_safe_remote_get( $this->url . $path, $args );
 			$response_code = wp_remote_retrieve_response_code( $response );
-		if ( is_wp_error( $response ) ) {
+			if ( is_wp_error( $response ) ) {
 				return $response;
-		}
-		switch ( $response_code ) {
-			case 200:
-			case 201:
-				break;
-			default:
-				return new WP_Error( 'api_error', wp_remote_retrieve_response_message( $response ), array( 'status' => $response_code ) );
-		}
+			}
+			switch ( $response_code ) {
+				case 200:
+				case 201:
+					break;
+				default:
+					return new WP_Error( 'api_error', wp_remote_retrieve_response_message( $response ), array( 'status' => $response_code ) );
+			}
 			return wp_remote_retrieve_body( $response );
 	}
 }

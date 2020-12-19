@@ -109,7 +109,7 @@ class HA_Config {
 </form>
 		</div>
 			<?php
-}
+		}
 	}
 
 	public static function settings_callback() {
